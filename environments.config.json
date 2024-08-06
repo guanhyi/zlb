@@ -1,0 +1,21 @@
+{
+    "title": "环境配置",
+    "configurations": {
+        "production": {
+            "fileReplacements": [
+                {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.prod.ts"
+                }
+            ]
+        },
+        "test": {
+            "fileReplacements": [
+                {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.test.ts"
+                }
+            ]
+        }
+    }
+}
