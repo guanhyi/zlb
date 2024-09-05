@@ -17,12 +17,16 @@ export default defineConfig({
         },
         alias: {
             '@': './src'
-        }
+        },
+        include: [/[\\/]node_modules[\\/]/]
     },
     output: {
         assetPrefix: './',
         polyfill: 'entry',
-        overrideBrowserslist: ['iOS >= 9', 'Android >= 4.4']
+        // overrideBrowserslist: ['iOS >= 9', 'Android >= 4.4'],
+        distPath: {
+            root: 'build/build'
+        }
     },
     plugins: [
         pluginReact(),
