@@ -3,4 +3,4 @@ import { createHashRouter } from 'react-router-dom'
 
 export const ROUTER = createIdentifier<ReturnType<typeof createHashRouter>>('RouterService')
 
-export type Router = ReturnType<typeof createHashRouter>
+export type RouterType = ReturnType<typeof createHashRouter>

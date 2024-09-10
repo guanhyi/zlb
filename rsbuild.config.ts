@@ -11,6 +11,9 @@ export default defineConfig({
             strategy: 'split-by-experience'
         }
     },
+    html: {
+        template: './index.html'
+    },
     source: {
         decorators: {
             version: 'legacy'
@@ -26,6 +29,14 @@ export default defineConfig({
         // overrideBrowserslist: ['iOS >= 9', 'Android >= 4.4'],
         distPath: {
             root: 'build/build'
+        }
+    },
+    server: {
+        proxy: {
+            '/api': {
+                changeOrigin: true,
+                target: 'https://ils.lszwfw.cn:1443/'
+            }
         }
     },
     plugins: [

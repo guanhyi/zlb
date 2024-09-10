@@ -1,24 +1,48 @@
 import { Inject, createIdentifier } from '@wendellhu/redi'
 import { Observable } from 'rxjs'
 import { environment } from '../../environments/environment'
-import { type Router, ROUTER } from './router.service'
+import { AccountService, useAccountStote } from './account.service'
 
+function getTokenLogin() {
+    //@ts-ignore
+    const reg = new RegExp('(^|&)' + 'token' + '=([^&]*)(&|$)', 'i')
+    return window.location.search.substr(1).match(reg)
+}
 export class StartupService {
-    constructor(@Inject(ROUTER) private routerService: Router) {}
-
+    constructor(@Inject(AccountService) public account: AccountService) {}
     mockLoad() {
-        console.log(this.routerService)
-
         return new Observable((observer) => {
-            observer.next({})
-            observer.complete()
+            const tokenArr = getTokenLogin()
+
+            let token = tokenArr ? tokenArr[2] : ''
+            this.account.zltSso(token).subscribe((res) => {
+                useAccountStote.setState({
+                    state: res.data
+                })
+                observer.next({})
+                observer.complete()
+            })
         })
     }
     proLoad() {
-        return new Observable((observer) => {})
+        return new Observable((obs) => {
+            window.zlt_cdk.ready().then(() => {
+                console.log(window.zlt_cdk)
+                let ticket = window.zlt_cdk.getToken()
+                this.account.zltSso(ticket).subscribe((res) => {
+                    useAccountStote.setState({
+                        state: res.data
+                    })
+                    obs.next({})
+                    obs.complete()
+                })
+            })
+        })
+        // return new Observable((observer) => {})
     }
 
     load(): Observable<any> {
+        console.log(environment.type)
         return environment.type !== 'prod' ? this.mockLoad() : this.proLoad()
     }
 }

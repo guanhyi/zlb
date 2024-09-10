@@ -1,9 +1,14 @@
 import { RouteObject } from 'react-router-dom'
-import App from '../App'
+import { FkView } from './FkView'
+import { SuccsesView } from './SuccsesView'
 
 export const routes: RouteObject[] = [
     {
         path: '/',
-        element: <App />
+        element: <FkView />
+    },
+    {
+        path: '/success',
+        element: <SuccsesView />
     }
 ]
