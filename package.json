@@ -11,7 +11,6 @@
         "@ngify/http": "^1.6.0",
         "@preact/signals-react": "^2.1.0",
         "@rsbuild/plugin-styled-components": "^1.0.1-beta.10",
-        "antd-mobile": "^5.37.1",
         "clsx": "^2.1.1",
         "immer": "^10.1.1",
         "react": "18.3.1",

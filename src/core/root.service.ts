@@ -4,8 +4,6 @@ import { HttpModule } from '../shared/http'
 import { HTTP_INTERCEPTOR } from '../shared/http/interceptor'
 import { DefaultInterceptor } from './net/default'
 import { ErrorInterceptor } from './net/error'
-import { AccountService } from './services/account.service'
-import { ScanCodeSerivce } from './services/scanCode.service'
 import { AuthInterceptor } from './net/auth'
 
 export const RootProvider: Dependency<any>[] = [
@@ -13,7 +11,5 @@ export const RootProvider: Dependency<any>[] = [
     [HTTP_INTERCEPTOR, { useClass: DefaultInterceptor }],
     [HTTP_INTERCEPTOR, { useClass: AuthInterceptor }],
     [HTTP_INTERCEPTOR, { useClass: ErrorInterceptor }],
-    [STARTUP_TOKEN, { useClass: StartupService }],
-    [AccountService],
-    [ScanCodeSerivce]
+    [STARTUP_TOKEN, { useClass: StartupService }]
 ]

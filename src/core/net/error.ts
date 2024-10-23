@@ -7,7 +7,7 @@ import {
     HttpResponse
 } from '@ngify/http'
 import { Inject } from '@wendellhu/redi'
-import { Toast } from 'antd-mobile'
+
 import { Observable, catchError, mergeMap, of, throwError } from 'rxjs'
 import { ROUTER, type RouterType } from '../services/router.service'
 
@@ -29,10 +29,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                         //         content: '登录错误'
                         //     })
                         // }
-                        Toast.show({
-                            icon: 'fail',
-                            content: event.body.msg
-                        })
+
                         this.router.navigate('/')
                         // notification.error({
                         //     message: event.body.msg,
@@ -50,16 +47,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                 if (err.error && err.error.status !== 200) {
                     switch (err.error.status) {
                         case 401:
-                            Toast.show({
-                                icon: 'fail',
-                                content: 'token过期或者暂无访问权限'
-                            })
 
                         default:
-                            Toast.show({
-                                icon: 'fail',
-                                content: '出错了'
-                            })
                     }
                 }
 
