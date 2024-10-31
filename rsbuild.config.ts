@@ -36,6 +36,13 @@ export default defineConfig({
             '/api': {
                 changeOrigin: true,
                 target: 'https://ils.lszwfw.cn:1443/'
+            },
+            '/proxy/': {
+                // target: 'http://192.168.50.40:8080/',
+                target: 'https://enterprise.lszwfw.cn:4096/',
+                // target: 'https://d770356f01.goho.co/',
+                changeOrigin: true,
+                pathRewrite: (path) => path.replace(/^\/proxy/, '')
             }
         }
     },
