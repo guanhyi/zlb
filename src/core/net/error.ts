@@ -37,6 +37,12 @@ export class ErrorInterceptor implements HttpInterceptor {
                         // })
                         return throwError(() => event)
                     }
+
+                    if (event.body.code === '401') {
+                        this.router.navigate('/authentication')
+                        return throwError(() => event)
+                    }
+
                     if (event.status !== 200) {
                         return throwError(() => event)
                     }

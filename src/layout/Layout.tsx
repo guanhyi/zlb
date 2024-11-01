@@ -1,3 +1,4 @@
+import { LayoutHeader } from './Header'
 import { Main } from './Main'
 import { LayoutNav } from './Nav'
 
@@ -6,7 +7,11 @@ export const Layout = () => {
         <>
             <div className="flex h-screen overflow-hidden ">
                 <LayoutNav />
-                <Main />
+
+                <div className="w-full">
+                    <LayoutHeader />
+                    <Main />
+                </div>
             </div>
         </>
     )
