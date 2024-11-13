@@ -1,4 +1,5 @@
 export const ZlbConfig = {
     miniAppId: '',
-    miniAppName: ''
+    miniAppName: '',
+    old: false
 }

@@ -1,3 +1,4 @@
+import { ZlbConfig } from '@/config'
 import { environment } from '@/environments/environment'
 
 export const useZWJSBridge = () => {
@@ -11,7 +12,11 @@ export const useZWJSBridge = () => {
                   onReady: () => {},
                   setTitle: () => {},
                   close: () => {},
-                  getUiStyle: () => {},
+                  getUiStyle: () => {
+                      return new Promise((rs) => {
+                          rs(ZlbConfig.old)
+                      })
+                  },
                   phoneCall: () => {}
               }
 

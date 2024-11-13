@@ -4,6 +4,12 @@ import { LayoutView } from './Layout'
 export const routes: RouteObject[] = [
     {
         path: '/',
-        element: <LayoutView />
+        element: <LayoutView />,
+        children: [
+            {
+                path: '/',
+                element: <div>zlb</div>
+            }
+        ]
     }
 ]
