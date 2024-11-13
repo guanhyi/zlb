@@ -1,0 +1,10 @@
+{
+    "name": "build",
+    "version": "1.0.0",
+    "scripts": {
+        "build": ""
+    },
+    "author": "",
+    "license": "ISC",
+    "description": ""
+}
