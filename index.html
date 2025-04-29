@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -16,12 +16,67 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="white" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>浙里办</title>
+        <title>龙易督移动端</title>
         <script
             type="text/javascript"
             src="https://assets.zjzwfw.gov.cn/assets/zwlog/1.0.0/zwlog.js"
         ></script>
-
+        <script
+            crossorigin="anonymous"
+            src="https://sonarqube.lszwfw.cn/page-spy/index.min.js"
+        ></script>
+        <script>
+            window.$pageSpy = new PageSpy({
+                autoRender: false,
+                project: '龙泉重大项目移动',
+                title: '龙泉重大项目移动'
+                // api: 'https://sonarqube.lszwfw.cn',
+                // clientOrigin: 'ht   tps://https://sonarqube.lszwfw.cn'
+            })
+        </script>
+        <script
+            src="https://wpkgate-emas.ding.zj.gov.cn/static/wpk-jssdk.1.0.2/wpkReporter.js"
+            crossorigin="true"
+        ></script>
+        <script>
+            try {
+                constconfig = {
+                    bid: 'lq_zdxmydd_zzdpro',
+                    signkey: '1234567890abcdef',
+                    gateway: 'https://wpkgate-emas.ding.zj.gov.cn'
+                }
+                constwpk = newwpkReporter(config)
+                wpk.installAll()
+                window._wpk = wpk
+            } catch (err) {
+                console.error('WpkReporterinitfail', err)
+            }
+        </script>
+        <script>
+            ;(function (w, d, s, q, i) {
+                w[q] = w[q] || []
+                ;(varf = d.getElementsByTagName(s)[0]), (j = d.createElement(s))
+                j.async = true
+                j.id = 'beacon-aplus'
+                j.src = 'https://alidt.alicdn.com/alilog/mlog/aplus_cloud.js'
+                f.parentNode.insertBefore(j, f)
+            })(window, document, 'script', 'aplus_queue')
+            aplus_queue.push({
+                action: 'aplus.setMetaInfo',
+                arguments: ['aplus-rhost-v', 'alog-api.ding.zj.gov.cn']
+            })
+            aplus_queue.push({
+                action: 'aplus.setMetaInfo',
+                arguments: ['aplus-rhost-g', 'alog-api.ding.zj.gov.cn']
+            })
+            varu = navigator.userAgent
+            varisAndroid = u.indexOf('Android') > -1
+            varisIOS = !!u.match(/\(i[^;]+;(U;)?CPU.+MacOSX/)
+            aplus_queue.push({
+                action: 'aplus.setMetaInfo',
+                arguments: ['appId', isAndroid ? '28302650' : isIOS ? '28328447' : '47130293']
+            })
+        </script>
         <!-- <script
                type="text/javascript"
                src="//assets.zjzwfw.gov.cn/assets/ZWJSBridge/1.1.0/zwjsbridge.js"

@@ -35,12 +35,12 @@ export default defineConfig({
         proxy: {
             '/api': {
                 changeOrigin: true,
-                target: 'https://ils.lszwfw.cn:1443/'
+                target: 'https://lqzdxm.longquan.gov.cn:1443/dev'
             },
             '/proxy/': {
                 // target: 'http://192.168.50.40:8080/',
-                target: 'https://enterprise.lszwfw.cn:4096/',
-                // target: 'https://d770356f01.goho.co/',
+                // target: 'http://192.168.50.49:8084/api',
+                target: 'https://lqzdxm.longquan.gov.cn:1443/dev',
                 changeOrigin: true,
                 pathRewrite: (path) => path.replace(/^\/proxy/, '')
             }

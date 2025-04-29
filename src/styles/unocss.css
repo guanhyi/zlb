@@ -1,4 +1,4 @@
 @unocss preflights;
 @unocss default;
-@import "@unocss/reset/sanitize/sanitize.css";
-@import "@unocss/reset/sanitize/assets.css";
+@import '@unocss/reset/sanitize/sanitize.css';
+@import '@unocss/reset/sanitize/assets.css';
