@@ -1,4 +1,6 @@
 import { useTaskService, AllTreeDTO } from '@/core/services/task.service'
+import { Match } from '@/shared/components/control/Match'
+import { Switch } from '@/shared/components/control/Switch'
 import { List, Button } from 'antd-mobile'
 import dayjs from 'dayjs'
 import { useState, useEffect } from 'react'
@@ -57,7 +59,50 @@ export const UpdateClockView = () => {
                                                                         状态：
                                                                     </div>
                                                                     <div className="text-[#FFA442] whitespace-nowrap">
-                                                                        {e.statusName}
+                                                                        <Switch>
+                                                                            <Match
+                                                                                when={
+                                                                                    e.status ===
+                                                                                    'NOTSTART'
+                                                                                }
+                                                                            >
+                                                                                <Switch>
+                                                                                    <Match
+                                                                                        when={
+                                                                                            e.completeApprovalStatus ===
+                                                                                            'TOBEREVIEWED'
+                                                                                        }
+                                                                                    >
+                                                                                        已打卡
+                                                                                    </Match>
+                                                                                    <Match
+                                                                                        when={
+                                                                                            e.completeApprovalStatus ===
+                                                                                            'NOTPASS'
+                                                                                        }
+                                                                                    >
+                                                                                        打卡失败
+                                                                                    </Match>
+                                                                                    <Match
+                                                                                        when={
+                                                                                            e.completeApprovalStatus ===
+                                                                                            'NEWBUILT'
+                                                                                        }
+                                                                                    >
+                                                                                        未开始
+                                                                                    </Match>
+                                                                                </Switch>
+                                                                            </Match>
+
+                                                                            <Match
+                                                                                when={
+                                                                                    e.status !==
+                                                                                    'NOTSTART'
+                                                                                }
+                                                                            >
+                                                                                {e.statusName}
+                                                                            </Match>
+                                                                        </Switch>
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -6,13 +6,13 @@ import {
 import { FileUpload } from '@/shared/components/FileUpload'
 import { Button, Form, Input, Stepper, TextArea } from 'antd-mobile'
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { array } from 'zod'
 
 export const ProjectInvestForm = () => {
     const [form] = Form.useForm()
     const { id } = useParams()
-
+    const n = useNavigate()
     const projectInvestService = useProjectInvestService()
     const [projectInvest, setProjectInvest] = useState<ProjectInvestDTO>()
     const onFinish = (values: any) => {
@@ -24,7 +24,9 @@ export const ProjectInvestForm = () => {
                 id: projectInvest?.id,
                 ...values
             })
-            .subscribe()
+            .subscribe(() => {
+                n(-1)
+            })
     }
     useEffect(() => {
         projectInvestService.getProjectInvestDetail(id || '').subscribe((res) => {
