@@ -1,22 +1,47 @@
 import { TaskDTO, TasksItem, useTaskService } from '@/core/services/task.service'
 import { FileUpload } from '@/shared/components/FileUpload'
-import { Button, Input, TextArea, Form } from 'antd-mobile'
+import { Button, Input, TextArea, Form, Toast } from 'antd-mobile'
 import form from 'antd-mobile/es/components/form'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export const UpdateClockForm = () => {
     const { id } = useParams()
     const [form] = Form.useForm()
 
     const taskService = useTaskService()
-    const onFinish = (values: any) => {}
+
     const [task, setTask] = useState<TasksItem>()
+
     useEffect(() => {
         taskService.getTaskDetail(id || '').subscribe((res) => {
             setTask(res.data)
         })
     }, [])
+    const navigate = useNavigate()
+
+    const onFinish = (values: any) => {
+        console.log(values)
+
+        const formData = {
+            deliverables: [] as any,
+            id: id
+        }
+
+        task?.deliverables.forEach((e, index) => {
+            formData.deliverables.push(values[`attachment${index}`])
+        })
+        taskService.updateClock(formData).subscribe((res) => {
+            console.log(res)
+
+            if (res.code === (200 as any)) {
+                Toast.show('提交成功')
+                navigate(-1)
+            } else {
+                Toast.show(res.msg)
+            }
+        })
+    }
     return (
         <div>
             <div className="bg-[#eff2fa] min-h-100vh">
@@ -38,9 +63,9 @@ export const UpdateClockForm = () => {
                         <Form.Item label="节点名称">
                             <Input disabled value={task?.name} />
                         </Form.Item>
-                        {task?.deliverables.map((e) => {
+                        {task?.deliverables.map((e, index) => {
                             return (
-                                <Form.Item label={e.title}>
+                                <Form.Item label={e.title} name={`attachment${index}`} key={index}>
                                     <FileUpload
                                         accept="*"
                                         maxCount={1}
@@ -49,7 +74,11 @@ export const UpdateClockForm = () => {
                                                 .map((file) => file.response?.id)
                                                 .filter(Boolean)
                                                 .join(',')
-                                            form.setFieldValue('attachment', filesList)
+                                            form.setFieldValue(`attachment${index}`, {
+                                                ...e,
+                                                content: response?.id || '',
+                                                isSubmitted: response ? 'True' : 'False'
+                                            })
                                         }}
                                     />
                                 </Form.Item>

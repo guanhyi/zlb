@@ -1,7 +1,10 @@
 import { environment } from '@/environments/environment'
+import { useDependency } from '@wendellhu/redi/react-bindings'
 import { Button, Dialog, Space, Toast } from 'antd-mobile'
 import { FileOutline } from 'antd-mobile-icons'
 import { useRef, useState } from 'react'
+import { NgHttp } from '../http/client'
+import { lastValueFrom } from 'rxjs'
 
 interface FileItem {
     url: string
@@ -28,7 +31,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
     const [fileList, setFileList] = useState<FileItem[]>(value)
     const inputRef = useRef<HTMLInputElement>(null)
     const e = environment
-
+    const http = useDependency(NgHttp)
     const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files
         if (!files) return
@@ -44,13 +47,14 @@ export const FileUpload: React.FC<FileUploadProps> = ({
                 const formData = new FormData()
                 formData.append('file', file)
 
-                const response = await fetch(`${e.api}/file/`, {
-                    method: 'POST',
-                    body: formData
-                })
-                const data = await response.json()
+                const response = await lastValueFrom(
+                    http.post<RemoteResultDTO<{ url: string }>>(`/file/`, formData)
+                )
 
-                if (data.code === 200) {
+                const data = response
+                // const data = await response.json()
+
+                if (data.code === (200 as any)) {
                     const newFile: FileItem = {
                         url: data.data.url,
                         name: file.name,
@@ -64,7 +68,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
                         return newList
                     })
                 } else {
-                    Toast.show(data.message || '上传失败')
+                    Toast.show(data.msg || '上传失败')
                 }
             } catch (error) {
                 Toast.show('上传失败')
@@ -120,7 +124,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
                         <Button
                             size="mini"
                             onClick={() => handleDelete(index)}
-                            className="!px-3 !text-[#ff4d4f] border-[#ff4d4f]"
+                            className="!px-3 !text-[#ff4d4f] border-[#ff4d4f] whitespace-nowrap "
                             fill="outline"
                         >
                             删除

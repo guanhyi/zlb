@@ -132,21 +132,15 @@ export const useTaskService = () => {
             ...form
         })
 
-
     const approvalTask = (form: any) =>
         http.put<RemoteResultDTO<BaseRequestAPI.PageDTO<TaskDTO[]>>>(`${path}/approval`, {
             ...form
         })
 
-
     const approvalCompleteTask = (form: any) =>
         http.put<RemoteResultDTO<BaseRequestAPI.PageDTO<TaskDTO[]>>>(`${path}/complete_approval`, {
             ...form
         })
-
-        
-
-
 
     // 分页查询
     const getTaskDetail = (id: string) => http.get<RemoteResultDTO<TasksItem>>(`${path}/${id}`)
@@ -180,6 +174,11 @@ export const useTaskService = () => {
         }
     }
 
+    const updateClock = (form: any) =>
+        http.put<RemoteResultDTO<BaseRequestAPI.PageDTO<TaskDTO[]>>>(`${path}/update_clock`, {
+            ...form
+        })
+
     const getAllTree = (projectId: string) =>
         http.post<RemoteResultDTO<AllTreeDTO[]>>(`${path}/allTree/${projectId}`)
 
@@ -189,6 +188,7 @@ export const useTaskService = () => {
         getTaskDetail,
         getAllTree,
         approvalTask,
-        approvalCompleteTask
+        approvalCompleteTask,
+        updateClock
     }
 }
